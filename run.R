@@ -41,7 +41,7 @@ model.data <- team.games %>%
 # Fit linear model for each team game
 lm.models <- model.data %>%
   group_by(team.game.num) %>%
-  do(model = lm(ros.win.pct ~ 0 + prev.win.pct + ytd.win.pct, data = .))
+  do(model = lm(ros.win.pct ~ prev.win.pct + ytd.win.pct, data = .))
 
 # Extract coefficients
 lm.coefs <- data.frame(team.game.num = lm.models$team.game.num, t(sapply(lm.models$model, coef)))
