@@ -10,7 +10,7 @@ game.logs.raw <- lapply(years, getRetrosheet, type = "game")
 # Reformat data
 game.logs.list <- lapply(game.logs.raw, subset, select = c("VisTm", "HmTm", "VisTmGNum", "HmTmGNum", "VisRuns", "HmRuns"))
 game.logs.list <- mapply(FUN = cbind, game.logs.list, year = years, SIMPLIFY = FALSE)
-game.logs <- do.call("rbind", game.logs.list)
+game.logs <- rbind_all(game.logs.list)
 
 # Create data frame with one row per team game
 visitors <- game.logs %>% 
