@@ -53,3 +53,11 @@ lm.coefs %>%
   gather(term, value, -team.game.num) %>%
   ggplot(aes(x = team.game.num, y = value, group = term, colour = term)) +
   geom_line()
+
+# Extract r squared
+lm.r.squared <- data.frame(team.game.num = lm.models$team.game.num, 
+                           r.squared = sapply(lm.models$model, function(x) summary(x)$r.squared))
+
+# Visualize r squared over course of season
+ggplot(lm.r.squared, aes(x = team.game.num, y = r.squared)) +
+  geom_line()
