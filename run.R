@@ -36,7 +36,7 @@ model.data <- team.games %>%
   ungroup() %>%
   inner_join(rolling.win.pcts, by = c("prev.year" = "year", "team" = "team")) %>%
   select(-team, -prev.year) %>%
-  filter(between(team.game.num, 5, 157))
+  filter(between(team.game.num, 0, 157))
 
 # Fit linear model for each team game
 lm.models <- model.data %>%
