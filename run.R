@@ -44,7 +44,8 @@ lm.models <- model.data %>%
   do(model = lm(ros.win.pct ~ prev.win.pct + ytd.win.pct, data = .))
 
 # Extract coefficients
-lm.coefs <- data.frame(team.game.num = lm.models$team.game.num, t(sapply(lm.models$model, coef)))
+lm.coefs <- data.frame(team.game.num = lm.models$team.game.num, 
+                       t(sapply(lm.models$model, coef)))
 colnames(lm.coefs)[2] <- "intercept"
 
 # Visualize coefficients over course of season
