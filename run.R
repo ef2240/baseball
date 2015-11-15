@@ -59,5 +59,6 @@ lm.r.squared <- data.frame(team.game.num = lm.models$team.game.num,
                            r.squared = sapply(lm.models$model, function(x) summary(x)$r.squared))
 
 # Visualize r squared over course of season
-ggplot(lm.r.squared, aes(x = team.game.num, y = r.squared)) +
+lm.r.squared %>%
+  ggplot(aes(x = team.game.num, y = r.squared)) +
   geom_line()
