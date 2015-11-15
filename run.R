@@ -45,9 +45,10 @@ lm.models <- model.data %>%
 
 # Extract coefficients
 lm.coefs <- data.frame(team.game.num = lm.models$team.game.num, t(sapply(lm.models$model, coef)))
+colnames(lm.coefs)[2] <- "intercept"
 
-# Visualize coefficient over course of season
+# Visualize coefficients over course of season
 lm.coefs %>% 
-  ggplot(aes(x = team.game.num, y = ytd.win.pct)) +
-  geom_line() + 
-  ylim(c(0, 1))
+  gather(term, value, -team.game.num) %>%
+  ggplot(aes(x = team.game.num, y = value, group = term, colour = term)) +
+  geom_line()
