@@ -2,6 +2,7 @@
 library(retrosheet)
 library(dplyr)
 library(ggplot2)
+library(tidyr)
 
 # Pull data
 years <- 1988:2014
