@@ -32,7 +32,7 @@ rolling.win.pcts <- team.games %>%
 # Join with previous year's win % and create data frame for model fitting
 model.data <- team.games %>%
   group_by(team, prev.year = year - 1) %>%
-  summarize(prev.season.win.pct = mean(won)) %>%
+  summarize(prev.win.pct = mean(won)) %>%
   ungroup() %>%
   inner_join(rolling.win.pcts, by = c("prev.year" = "year", "team" = "team")) %>%
   select(-team, -prev.year) %>%
@@ -41,7 +41,7 @@ model.data <- team.games %>%
 # Fit linear model for each team game
 lm.models <- model.data %>%
   group_by(team.game.num) %>%
-  do(model = lm(ros.win.pct ~ 0 + prev.season.win.pct + ytd.win.pct, data = .))
+  do(model = lm(ros.win.pct ~ 0 + prev.win.pct + ytd.win.pct, data = .))
 
 # Extract coefficients
 lm.coefs <- data.frame(team.game.num = lm.models$team.game.num, t(sapply(lm.models$model, coef)))
