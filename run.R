@@ -1,6 +1,7 @@
 # Load packages
 library(retrosheet)
 library(dplyr)
+library(tidyr)
 library(ggplot2)
 
 # Pull data
