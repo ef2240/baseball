@@ -49,11 +49,14 @@ lm.coefs <- data.frame(team.game.num = lm.models$team.game.num,
                        t(sapply(lm.models$model, coef)))
 colnames(lm.coefs)[2] <- "intercept"
 
-# Visualize coefficients over course of season
+# Visualize coefficients over course of season (multiply intercept by 2 so they are on same scale)
 lm.coefs %>% 
+  mutate("intercept*2" = intercept * 2) %>%
+  select(-intercept) %>%
   gather(term, value, -team.game.num) %>%
   ggplot(aes(x = team.game.num, y = value, group = term, colour = term)) +
   geom_line()
+ggsave("coefs_plot.png")
 
 # Extract r squared
 lm.r.squared <- data.frame(team.game.num = lm.models$team.game.num, 
