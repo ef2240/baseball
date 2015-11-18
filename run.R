@@ -5,7 +5,7 @@ library(tidyr)
 library(ggplot2)
 
 # Pull data
-years <- 1988:2014
+years <- 1996:2014
 game.logs.raw <- lapply(years, getRetrosheet, type = "game")
 
 # Reformat data
